@@ -1,12 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<?php 
+
+    $email = $_SESSION['email'];
+    require_once('database/database.php');
+    $conn = get_connection();
+    $sql = "SELECT username FROM user WHERE email = ?";
+    $stm = $conn->prepare($sql);
+    $stm->bind_param('s', $email);
+    $stm->execute();
+    $stm->bind_result($username);
+    $stm->fetch();
+    // $stm->close();
+    // $conn->close();
+?>
+
+
     
-</body>
-</html>

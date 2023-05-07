@@ -11,9 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Sen&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="awsome-icons/css/solid.css">
-
-    <script src="js/index.js"></script>
-     
+    
   </head>
   <body>
     <header>
@@ -51,8 +49,8 @@
       </nav>
     </header>
     <main>
-      <form class="form-control" action="home.php" method="POST">
-        <input type="search" name="music" id="" placeholder="Enter music name...">
+      <form class="form-control" action="search.php" method="get">
+        <input type="search" name="search_input" id="" placeholder="Enter music name...">
         <button class="search-btn" type="submit"><i class="fa-solid fa-headphones"></i></button>
       </form>
       <div class="greeting">
@@ -92,7 +90,7 @@
                 </audio>
 
             </div>
-            <form class="reaction-form" action="home.php" method="post">
+            <form class="reaction-form" action="#" method="POST">
               <i class="fa-solid fa-star"></i>
               <i class="fa-solid fa-heart"></i>
             </form>
@@ -234,8 +232,18 @@
             </form>
           </div>   
         </div>
-        
-        
+        <script>
+          var audio_playing = document.getElementsByTagName('audio');
+          for(var i = 0; i < audio_playing.length; i++) {
+            audio_playing[i].addEventListener('play', function() {
+              for(var j = 0; j < audio_playing.length; j++) {
+                if(audio_playing[j] != this) {
+                  audio_playing[j].pause()
+                }
+              }
+            })
+          }
+        </script>
       </section>
       
     </main>

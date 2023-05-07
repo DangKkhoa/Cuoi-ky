@@ -1,16 +1,13 @@
-
 <?php 
     session_start();
-
+    require_once('database/database.php');
+    $conn = get_connection();
     if(!isset($_SESSION['email'])) {
         header('Location: login.php');
         die();
     }
     else {
         $email = $_SESSION['email'];
-        require_once('database/database.php');
-        $conn = get_connection();
-
         $sql = "SELECT username FROM user WHERE email = ?";
 
         $stm = $conn->prepare($sql);
@@ -19,7 +16,7 @@
         $stm->bind_result($username);
         $stm->fetch();
         $stm->close();
-        $conn->close();
+        
 
     }
     
@@ -38,8 +35,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Sen&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="awsome-icons/css/solid.css">
-
+    <!-- <link rel="stylesheet" href="awsome-icons/css/solid.css"> -->
+    <style>
+      a {
+        text-decoration: none;
+      }
+    </style>
     <script src="js/index.js"></script>
      
   </head>
@@ -54,7 +55,7 @@
             <li class="menu-items active"><a href="#">Home</a></li>
             <li class="menu-items"><a href="genres.php">Genres</a></li>
             <li class="menu-items"><a href="artists.php" id="display-link">Artists</a></li>
-            <li class="menu-items"><a href="playlists.php">Playlists</a></li>
+            <li class="menu-items"><a href="my_playlist.php">Playlists</a></li>
             <li class="menu-items"><a href="albums.php">Albums</a></li>
             
           </ul>
@@ -77,8 +78,8 @@
       </nav>
     </header>
     <main>
-      <form class="form-control" action="home.php" method="POST">
-        <input type="search" name="music" id="" placeholder="Enter music name...">
+      <form class="form-control" action="search.php" method="GET">
+        <input type="search" name="search_input" id="" placeholder="Enter music name...">
         <button class="search-btn" type="submit"><i class="fa-solid fa-headphones"></i></button>
       </form>
       <div class="greeting">
@@ -91,90 +92,34 @@
         
         
         <div class="grid-container">
-          <div class="item">
-            <div class ="item">
-                <img src="images/chimsau.jpg" alt="Chim sau">
-                <h3>Chìm sâu</h3>
-                <p>MCK, Trung Trần</p>
-                <audio controls>
-                  <source src="songs/ChimSau-MCKTrungTran-7205660.mp3" type="audio/mpeg">
-                </audio>
+          <?php 
+            $sql = "SELECT songID, songName, songLink, singer, genre, songImg FROM song Where genre LIKE '%Top track%'";
+            $stm = $conn->prepare($sql);
+            $stm->bind_result($song_id, $song_name, $song_link, $singer, $genre, $song_img);
+            $stm->execute();
 
-            </div>
-            
-            <form class="reaction-form" action="home.php" method="post">
-                <button class="reaction"><i class="fa-solid fa-star"></i></button>
-                <button class="reaction"><i class="fa-solid fa-heart"></i></button>
-                
-            </form>
-          </div>
-          <div class="item">
-            <div class ="item">
-                <img src="images/ngu1m.jpg" alt="Ngu mot minh">
-                <h3>Ngủ Một Mình</h3>
-                <p>HIEUTHUHAI</p>
-                <audio controls>
-                  <source src="NguMotMinh-HIEUTHUHAINegavKewtiie-8267763.ogg" type="audio/ogg">
-                </audio>
+            while($row=$stm->fetch()) {
+              ?>
+                <div class="item">
+                  <div class ="item">
+                      <img src="images/<?php echo "$song_img" ?>" alt="Ngu mot minh">
+                      <h3><?php echo "$song_name"?></h3>
+                      <p><?php echo "$singer" ?></p>
+                      <audio controls>
+                        <source src="songs/<?php echo "$song_link"?>" type="audio/mpeg">
+                      </audio>
 
-            </div>
-            <form class="reaction-form" action="home.php" method="post">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-heart"></i>
-            </form>
-          </div>   
-          
-          <div class="item">
-            <div class ="item">
-                <img src="images/mono.jpg" alt="Waiting for you">
-                <h3>Waiting For You</h3>
-                <p>MONO</p>
-                <audio controls>
-                  <source src="track1.mp3" type="audio/mpeg">
-                </audio>
+                  </div>
+                  <div class="reaction">
+                    <a href="my_playlist.php?song_id=<?php echo "$song_id" ?>" class="reaction-form"><i class="fa-solid fa-star"></i></a>
+                    <a href="" class="reaction-form"><i class="fa-solid fa-heart"></i></a>
+                  </div>
+                </div>   
+              <?php
+            }
 
-            </div>
-
-            <form class="reaction-form" action="home.php" method="post">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-heart"></i>
-            </form>
-          </div>   
-          
-          <div class="item">
-            <div class ="item">
-                <img src="images/tiny.jpg" alt="Tiny love">
-                <h3>Tiny Love</h3>
-                <p>Thịnh Suy</p>
-                <audio controls>
-                  <source src="track1.mp3" type="audio/mpeg">
-                </audio>
-
-            </div>
-
-            <form class="reaction-form" action="home.php" method="post">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-heart"></i>
-            </form>
-          </div>   
-          
-
-          <div class="item">
-            <div class ="item">
-                <img src="images/chungtacuahientai.jpg" alt="Chúng ta của hiện tại">
-                <h3>Chúng Ta Của Hiện Tại</h3>
-                <p>Sơn Tùng M-TP</p>
-                <audio controls>
-                  <source src="track1.mp3" type="audio/mpeg">
-                </audio>
-
-            </div>
-
-            <form class="reaction-form" action="home.php" method="post">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-heart"></i>
-            </form>
-          </div>   
+          ?>
+             
           
         </div>
       </section>
@@ -187,14 +132,18 @@
                 <h3>Die For You</h3>
                 <p>The Weeknd</p>
                 <audio controls>
-                  <source src="track1.mp3" type="audio/mpeg">
+                  <source src="songs/Die For You - The Weeknd.mp3" type="audio/mpeg">
                 </audio>
             </div>
-
-            <form class="reaction-form" action="home.php" method="post">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-heart"></i>
-            </form>
+            <div class="reaction">
+              <form class="reaction-form" action="my_playlist.php" method="post">
+                <button class="reaction"><i class="fa-solid fa-star"></i></button>
+  
+              </form>
+              <form class="reaction-form" action="love.php">
+                <button class="reaction"><i class="fa-solid fa-heart"></i></button>
+              </form>
+            </div>
           </div>   
           
           <div class="item">
@@ -203,14 +152,18 @@
                 <h3>SICKO MODE</h3>
                 <p>Travis Scott,Drake</p>
                 <audio controls>
-                  <source src="track1.mp3" type="audio/mpeg">
+                  <source src="songs/Travis_Scott_Ft_Drake_-_Sicko_Mode_Amebo9ja.com.mp3" type="audio/mpeg">
                 </audio>
             </div>
-
-            <form class="reaction-form" action="home.php" method="post">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-heart"></i>
-            </form>
+            <div class="reaction">
+              <form class="reaction-form" action="my_playlist.php" method="post">
+                <button class="reaction"><i class="fa-solid fa-star"></i></button>
+  
+              </form>
+              <form class="reaction-form" action="love.php">
+                <button class="reaction"><i class="fa-solid fa-heart"></i></button>
+              </form>
+            </div>
           </div>   
           
           <div class="item">
@@ -219,15 +172,20 @@
                 <h3>Industry Baby</h3>
                 <p>Lil Nas X</p>
                 <audio controls>
-                  <source src="track1.mp3" type="audio/mpeg">
+                  <source src="songs/Lil-Nas-X-Ft-Jack-Harlow-Industry-Baby-(TrendyBeatz.com).mp3" type="audio/mpeg">
                 </audio>
 
 
             </div>
-            <form class="reaction-form" action="home.php" method="post">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-heart"></i>
-            </form>
+            <div class="reaction">
+              <form class="reaction-form" action="my_playlist.php" method="post">
+                <button class="reaction"><i class="fa-solid fa-star"></i></button>
+  
+              </form>
+              <form class="reaction-form" action="love.php">
+                <button class="reaction"><i class="fa-solid fa-heart"></i></button>
+              </form>
+            </div>
           </div>
           <div class="item">
             <div class ="item">
@@ -238,10 +196,15 @@
                   <source src="track1.mp3" type="audio/mpeg">
                 </audio>
               </div>   
-            <form class="reaction-form" action="home.php" method="post">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-heart"></i>
-            </form>
+              <div class="reaction">
+              <form class="reaction-form" action="my_playlist.php" method="post">
+                <button class="reaction"><i class="fa-solid fa-star"></i></button>
+  
+              </form>
+              <form class="reaction-form" action="love.php">
+                <button class="reaction"><i class="fa-solid fa-heart"></i></button>
+              </form>
+            </div>
           </div>
           <div class="item">
             <div class ="item">
@@ -253,14 +216,29 @@
                 </audio>
 
             </div>
-
-            <form class="reaction-form" action="home.php" method="post">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-heart"></i>
-            </form>
+            <div class="reaction">
+              <form class="reaction-form" action="my_playlist.php" method="post">
+                <button class="reaction"><i class="fa-solid fa-star"></i></button>
+  
+              </form>
+              <form class="reaction-form" action="love.php">
+                <button class="reaction"><i class="fa-solid fa-heart"></i></button>
+              </form>
+            </div>
           </div>   
         </div>
-        
+        <script>
+          var audio_playing = document.getElementsByTagName('audio');
+          for(var i = 0; i < audio_playing.length; i++) {
+            audio_playing[i].addEventListener('play', function() {
+              for(var j = 0; j < audio_playing.length; j++) {
+                if(audio_playing[j] != this) {
+                  audio_playing[j].pause()
+                }
+              }
+            })
+          }
+        </script>
         
       </section>
       
