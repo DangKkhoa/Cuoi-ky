@@ -101,12 +101,10 @@
                 </audio>
 
             </div>
-            
-            <form class="reaction-form" action="home.php" method="post">
-                <button class="reaction"><i class="fa-solid fa-star"></i></button>
-                <button class="reaction"><i class="fa-solid fa-heart"></i></button>
-                
-            </form>
+            <div class="reaction">
+              <a href="my_playlist.php?song_id=<?php echo "$song_id" ?>" class="reaction-form"><i class="fa-solid fa-star"></i></a>
+              <a href="" class="reaction-form"><i class="fa-solid fa-heart"></i></a>
+            </div>
           </div>
           <div class="item">
             <div class ="item">

@@ -142,14 +142,15 @@ main {
   margin-top: 15px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-wrap: wrap;
   width: 100%;
 }
 
 
 .artist-content img {
-  width: 100px;
+  width: 150px;
+  height: 150px;
   margin: 20px;
   padding: 5px;
   border-radius: 12px;

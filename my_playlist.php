@@ -1,8 +1,12 @@
 <?php 
     session_start();
+    $song_id = '';
+    if(!empty($_GET['song_id'])) {
+      $song_id = $_GET['song_id'];
+    }
     
     
-    $song_id = $_GET['song_id'];
+    
     
 
 ?>
@@ -32,7 +36,7 @@
             <li class="menu-items"><a href="homepage.php">Home</a></li>
             <li class="menu-items"><a href="genres.php">Genres</a></li>
             <li class="menu-items"><a href="artists.php" id="display-link">Artists</a></li>
-            <li class="menu-items active"><a href="playlists.php">Playlists</a></li>
+            <li class="menu-items active"><a href="my_playlist.php">Playlists</a></li>
             <li class="menu-items"><a href="albums.php">Albums</a></li>
             
           </ul>
@@ -58,7 +62,7 @@
     <main>
         <div class="container">
           <div class="playlist-list">
-        
+            <form action="add_song_to_playlist.php" class="playlist-add" method="POST">
             <?php 
               require_once('database/database.php');
               $conn = get_connection();
@@ -76,23 +80,57 @@
                 $result = $stm->get_result();
                 while($row=$result->fetch_assoc()) {
                   ?>
+                    <a class="playlist-link" href="playlist.php?pl_id=<?php echo $row['id'] ?>">
+
                     
-                      <form action="add_song_to_playlist.php" method="POST">
-                        <input type="button" value="<?php echo $row['name']?>">
-                        <button>add</button>
-                      </form>
-                    
-                    
+                      <div class="playlist-content">
+                        <div class="playlist-img">
+                          <img src="images/images.jpg" alt="">
+                        </div>
+                        <div class="playlist-name">
+                          <p><?php echo $row['name']?></p>
+                        </div>
+                        <div class="playlist-option">
+                        
+                          <?php 
+                            if(isset($_GET['song_id'])) {
+                              ?>
+                                <input class="radio-input" type="radio" name="song_title" value="<?php echo "$song_id"?>">
+                              <?php
+                            }
+
+                          ?>
+                          
+                        </div>
+                        
+                      </div>
+                    </a>
+          
+
+                  <?php
+
+                }
+                echo "<p><a href='create_playlist.php'>Create new playlist</a>...</p>";
+              }
+              
+              else {
+                echo "<p>You have not had any playlist yet, <a href='create_playlist.php'>Create one</a>...</p>";
+              }
+            ?>
+              <?php 
+                if(isset($_GET['song_id'])) {
+                  ?>
+                    <button>add song</button>
                   <?php
                 }
-              }
-              else {
-                echo "<p>You have not had any playlist yet, <a href='create_playlist.php'>Create one</a></p>";
-              }
-
-            ?>
+              ?>
+              
+            </form>
           </div>
         </div>
+        <script>
+            
+        </script>
     </main>
 </body>
 </html>
