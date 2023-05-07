@@ -25,8 +25,7 @@ Step 6: Testing and Deployment
 Once you have completed coding your website, you should test it thoroughly to ensure that it works as expected. This involves testing the front-end and back-end, debugging any errors, and optimizing your website for performance. Once you are satisfied with your website, you can deploy it to a web hosting provider like AWS or DigitalOcean.
 
 
-
-
+admin account: admin@gmail.com - admin123456
 
 
 CREATE TABLE songs (
