@@ -1,5 +1,10 @@
 <?php 
     session_start();
+    if(!isset($_SESSION['email'])) {
+      echo "<script>alert('You need to login to continue')</script>";
+      header("refresh:1;url=/cuoiki/login.php");
+      die();
+    }
     $song_id = '';
     if(!empty($_GET['song_id'])) {
       $song_id = $_GET['song_id'];
@@ -38,7 +43,13 @@
             <li class="menu-items"><a href="artists.php" id="display-link">Artists</a></li>
             <li class="menu-items active"><a href="my_playlist.php">Playlists</a></li>
             <li class="menu-items"><a href="albums.php">Albums</a></li>
-            
+            <?php 
+                if($username === 'admin') {
+                    ?>
+                    <li class="menu-items"><a href="users.php">Users</a></li>
+                    <?php
+                }
+            ?>
           </ul>
         </div>
         <div class="profile-container">
@@ -62,7 +73,9 @@
     <main>
         <div class="container">
           <div class="playlist-list">
-            <form action="add_song_to_playlist.php" class="playlist-add" method="POST">
+            <div class="playlist-add">
+
+            
             <?php 
               require_once('database/database.php');
               $conn = get_connection();
@@ -78,6 +91,8 @@
                 $stm = $conn->prepare('SELECT * FROM playlists');
                 $stm->execute();
                 $result = $stm->get_result();
+                // $stm->store_result();
+                // $stm->bind_result($pl_id);
                 while($row=$result->fetch_assoc()) {
                   ?>
                     <a class="playlist-link" href="playlist.php?pl_id=<?php echo $row['id'] ?>">
@@ -120,12 +135,12 @@
               <?php 
                 if(isset($_GET['song_id'])) {
                   ?>
-                    <button>add song</button>
+                    <button><a href="add_to_playlist.php?song_id=<?php echo "$song_id"?>">add song</a></button>
                   <?php
                 }
               ?>
               
-            </form>
+            </div>
           </div>
         </div>
         <script>

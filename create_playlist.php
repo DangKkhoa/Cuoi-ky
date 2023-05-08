@@ -79,6 +79,7 @@
             <form style="padding: 15px 20px" action="create_playlist.php" method="POST">
                 <label for="name">Playlist name: </label>
                 <input type="text" name="playlist_name">
+                <button>Create</button>
             </form>
             <div>
                 <?php 

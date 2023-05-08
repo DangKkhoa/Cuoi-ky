@@ -1,12 +1,13 @@
 <?php 
   session_start();
-
+  require('database/database.php');
+  $conn = get_connection();
   if(isset($_SESSION['email'])) {
     header('Location: homepage.php');
   }
-  require('database/database.php');
-  $conn = get_connection();
-
+  
+  
+  
   $email = '';
   $pass = '';
   $error = '';
@@ -28,7 +29,8 @@
       header("refresh:0.5;url=/cuoiki/homepage.php");
       
       
-    } else {
+    }
+    else {
         $error = 'Wrong email or password';
         // echo "<button><a style='font-size: 16px; text-decoration: none; color: black;' href='login.html'>Go back to login page</a></button>";
     }
@@ -75,7 +77,7 @@
       </div>
       <div class="account-control">
         <button type="submit">Sign in</button>
-        Or <a href="register.html">Create one</a>
+        Or <a href="register.php">Create one</a>
       </div>
       
 

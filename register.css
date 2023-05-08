@@ -28,10 +28,7 @@ body {
     
 }
 
-.form-signin .account-control {
-    width: 50%;
-    margin: 8px auto;
-}
+
 
 #_username {
     width: 100%;
@@ -69,6 +66,10 @@ body {
 
 .form-signin .account-control {
     margin-bottom: 8px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 

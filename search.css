@@ -175,9 +175,12 @@ main {
 .song-content .song-info {
   margin-bottom: 5px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   width: 400px;
   
+}
+.song-info span {
+  margin: 5px;
 }
 
 audio {

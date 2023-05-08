@@ -2,6 +2,7 @@
     session_start();
     require_once('database/database.php');
     $conn = get_connection();
+    $is_admin = false;
     if(!isset($_SESSION['email'])) {
         header('Location: login.php');
         die();
@@ -16,6 +17,8 @@
         $stm->bind_result($username);
         $stm->fetch();
         $stm->close();
+
+        
         
 
     }
@@ -57,6 +60,13 @@
             <li class="menu-items"><a href="artists.php" id="display-link">Artists</a></li>
             <li class="menu-items"><a href="my_playlist.php">Playlists</a></li>
             <li class="menu-items"><a href="albums.php">Albums</a></li>
+            <?php 
+              if($username === 'admin') {
+                ?>
+                  <li class="menu-items"><a href="users.php">Users</a></li>
+                <?php
+              }
+            ?>
             
           </ul>
         </div>
@@ -93,9 +103,9 @@
         
         <div class="grid-container">
           <?php 
-            $sql = "SELECT songID, songName, songLink, singer, genre, songImg FROM song Where genre LIKE '%Top track%'";
+            $sql = "SELECT songID, songName, songLink, singer, songImg, category FROM song Where category LIKE '%Top track%'";
             $stm = $conn->prepare($sql);
-            $stm->bind_result($song_id, $song_name, $song_link, $singer, $genre, $song_img);
+            $stm->bind_result($song_id, $song_name, $song_link, $singer, $song_img, $category);
             $stm->execute();
 
             while($row=$stm->fetch()) {
@@ -112,7 +122,7 @@
                   </div>
                   <div class="reaction">
                     <a href="my_playlist.php?song_id=<?php echo "$song_id" ?>" class="reaction-form"><i class="fa-solid fa-star"></i></a>
-                    <a href="" class="reaction-form"><i class="fa-solid fa-heart"></i></a>
+                    <a href="like_songs.php?song_id=<?php echo "$song_id" ?>" class="reaction-form"><i class="fa-solid fa-heart"></i></a>
                   </div>
                 </div>   
               <?php

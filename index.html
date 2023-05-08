@@ -23,8 +23,8 @@
           <ul class="menu-list">
             <li class="menu-items active"><a href="index.html">Home</a></li>
             <li class="menu-items"><a href="genres.php">Genres</a></li>
-            <li class="menu-items"><a href="#" id="display-link">Artists</a></li>
-            <li class="menu-items"><a href="#">Playlists</a></li>
+            <li class="menu-items"><a href="artists.php" id="display-link">Artists</a></li>
+            <li class="menu-items"><a href="my_playlist.php">Playlists</a></li>
             <li class="menu-items"><a href="#">Albums</a></li>
             
           </ul>
@@ -34,7 +34,7 @@
           <div class="profile">
             <!-- <img class="avatar" src="\cuoiki\cuoiki\45923332.jpg" alt=""> -->
             <div class="avatar">
-              <i class="fa-solid fa-circle-user"></i>
+              <a href="user.php"><i class="fa-solid fa-circle-user"></i></a>
             </div>
             <div class="user">
               Hi, <span class="username">Guest</span>
@@ -42,7 +42,7 @@
           </div>
           <div class="account-options">
             <a href="login.php">Sign in</a> |
-            <a href="register.html">Sign up</a>
+            <a href="register.php">Sign up</a>
           </div>
         </div>
         
@@ -74,11 +74,10 @@
 
             </div>
             
-            <form class="reaction-form" action="home.php" method="post">
-                <button class="reaction"><i class="fa-solid fa-star"></i></button>
-                <button class="reaction"><i class="fa-solid fa-heart"></i></button>
-                
-            </form>
+            <div class="reaction">
+              <a href="my_playlist.php" class="reaction-form"><i class="fa-solid fa-star"></i></a>
+              <a href="" class="reaction-form"><i class="fa-solid fa-heart"></i></a>
+            </div>
           </div>
           <div class="item">
             <div class ="item">
@@ -90,10 +89,10 @@
                 </audio>
 
             </div>
-            <form class="reaction-form" action="#" method="POST">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-heart"></i>
-            </form>
+            <div class="reaction">
+              <a href="my_playlist.php" class="reaction-form"><i class="fa-solid fa-star"></i></a>
+              <a href="" class="reaction-form"><i class="fa-solid fa-heart"></i></a>
+            </div>
           </div>   
           
           <div class="item">
@@ -107,10 +106,10 @@
 
             </div>
 
-            <form class="reaction-form" action="home.php" method="post">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-heart"></i>
-            </form>
+            <div class="reaction">
+              <a href="my_playlist.php" class="reaction-form"><i class="fa-solid fa-star"></i></a>
+              <a href="" class="reaction-form"><i class="fa-solid fa-heart"></i></a>
+            </div>
           </div>   
           
           <div class="item">
@@ -124,10 +123,10 @@
 
             </div>
 
-            <form class="reaction-form" action="home.php" method="post">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-heart"></i>
-            </form>
+            <div class="reaction">
+              <a href="my_playlist.php" class="reaction-form"><i class="fa-solid fa-star"></i></a>
+              <a href="" class="reaction-form"><i class="fa-solid fa-heart"></i></a>
+            </div>
           </div>   
           
 
@@ -142,10 +141,10 @@
 
             </div>
 
-            <form class="reaction-form" action="home.php" method="post">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-heart"></i>
-            </form>
+            <div class="reaction">
+              <a href="my_playlist.php" class="reaction-form"><i class="fa-solid fa-star"></i></a>
+              <a href="" class="reaction-form"><i class="fa-solid fa-heart"></i></a>
+            </div>
           </div>   
           
         </div>
@@ -163,10 +162,10 @@
                 </audio>
             </div>
 
-            <form class="reaction-form" action="home.php" method="post">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-heart"></i>
-            </form>
+            <div class="reaction">
+              <a href="my_playlist.php" class="reaction-form"><i class="fa-solid fa-star"></i></a>
+              <a href="" class="reaction-form"><i class="fa-solid fa-heart"></i></a>
+            </div>
           </div>   
           
           <div class="item">
@@ -179,10 +178,10 @@
                 </audio>
             </div>
 
-            <form class="reaction-form" action="home.php" method="post">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-heart"></i>
-            </form>
+            <div class="reaction">
+              <a href="my_playlist.php" class="reaction-form"><i class="fa-solid fa-star"></i></a>
+              <a href="" class="reaction-form"><i class="fa-solid fa-heart"></i></a>
+            </div>
           </div>   
           
           <div class="item">
@@ -196,10 +195,10 @@
 
 
             </div>
-            <form class="reaction-form" action="home.php" method="post">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-heart"></i>
-            </form>
+            <div class="reaction">
+              <a href="my_playlist.php" class="reaction-form"><i class="fa-solid fa-star"></i></a>
+              <a href="" class="reaction-form"><i class="fa-solid fa-heart"></i></a>
+            </div>
           </div>
           <div class="item">
             <div class ="item">
@@ -209,11 +208,11 @@
                 <audio controls>
                   <source src="track1.mp3" type="audio/mpeg">
                 </audio>
-              </div>   
-            <form class="reaction-form" action="home.php" method="post">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-heart"></i>
-            </form>
+            </div>   
+            <div class="reaction">
+              <a href="my_playlist.php" class="reaction-form"><i class="fa-solid fa-star"></i></a>
+              <a href="" class="reaction-form"><i class="fa-solid fa-heart"></i></a>
+            </div>
           </div>
           <div class="item">
             <div class ="item">
@@ -226,10 +225,10 @@
 
             </div>
 
-            <form class="reaction-form" action="home.php" method="post">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-heart"></i>
-            </form>
+            <div class="reaction">
+              <a href="my_playlist.php" class="reaction-form"><i class="fa-solid fa-star"></i></a>
+              <a href="" class="reaction-form"><i class="fa-solid fa-heart"></i></a>
+            </div>
           </div>   
         </div>
         <script>
